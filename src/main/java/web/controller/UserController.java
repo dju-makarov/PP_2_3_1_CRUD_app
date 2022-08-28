@@ -19,7 +19,6 @@ public class UserController {
 
     @GetMapping("/users")
     public String getAllUsers(Model model) {
-
         model.addAttribute("users", userService.getAllUsers());
         return "users";
     }
@@ -43,12 +42,7 @@ public class UserController {
 
     @PostMapping("/users/{id}")
     public String update(@PathVariable int id, @ModelAttribute("user") User user) {
-        User existingUser = userService.getUserById(id);
-        existingUser.setId(id);
-        existingUser.setName(user.getName());
-        existingUser.setLastName(user.getLastName());
-        existingUser.setEmail(user.getEmail());
-        userService.updateUser(existingUser);
+        userService.updateUser(user);
         return "redirect:/users";
     }
 
